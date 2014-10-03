@@ -24,8 +24,8 @@ public class TestingStuff {
         
         TimeUtils.setReference(TimeUtils.day(1,1,2010));
         Log log = new Log();
-        log.getEntries().set(new Entry());
-        log.getEntries().set(new Entry(), TimeUtils.from(TimeUtils.current()));
+        log.getEntries().set(new Entry(TimeUtils.current().toDate(),log, "owner", "source", "description"));
+        log.getEntries().set(new Entry(TimeUtils.current().toDate(),log, "owner2", "source2", "description2"), TimeUtils.from(TimeUtils.current()));
         
         em.getTransaction().commit();
         em.close();

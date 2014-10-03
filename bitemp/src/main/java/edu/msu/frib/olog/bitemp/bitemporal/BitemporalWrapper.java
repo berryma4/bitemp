@@ -7,6 +7,7 @@ package edu.msu.frib.olog.bitemp.bitemporal;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Embedded;
@@ -52,21 +53,23 @@ public abstract class BitemporalWrapper<V> implements Bitemporal {
 
     public static final String _RECORD_FROM = "recordInterval.start";
     public static final String _RECORD_TO = "recordInterval.end";
-
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "From", column = @Column(name = "validFrom")),
-        @AttributeOverride(name = "To", column = @Column(name = "validTo"))
-    })
-    @Convert(converter = IntervalConverter.class)
+    
+//    @Embedded
+//    @AttributeOverrides({
+//        @AttributeOverride(name = "From", column = @Column(name = "validFrom")),
+//        @AttributeOverride(name = "To", column = @Column(name = "validTo"))
+//    })
+//    @Convert(converter = IntervalConverter.class)
+    @Basic
     private Interval validityInterval;
 
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = "From", column = @Column(name = "recordFrom")),
-        @AttributeOverride(name = "To", column = @Column(name = "recordTo"))
-    })
-    @Convert(converter = IntervalConverter.class)
+//    @Embedded
+//    @AttributeOverrides({
+//        @AttributeOverride(name = "From", column = @Column(name = "recordFrom")),
+//        @AttributeOverride(name = "To", column = @Column(name = "recordTo"))
+//    })
+//    @Convert(converter = IntervalConverter.class)
+    @Basic
     private Interval recordInterval;
 
     

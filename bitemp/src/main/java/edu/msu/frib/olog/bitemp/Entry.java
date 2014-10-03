@@ -10,6 +10,8 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -38,9 +40,31 @@ public class Entry implements Serializable {
     private Log log;
     @Id
     private Long id;
+    
+    
+    
+    @Column(name = "owner", nullable = false, length = 50, insertable = true, updatable = false)
+    private String owner;
+    
+    @Column(name = "source", nullable = false, length = 50, insertable = true, updatable = false)
+    private String source;
+    
+    @Enumerated(EnumType.STRING)
+    private Level level;
+    
+    @Column(name = "description", nullable = false, insertable = true, updatable = false)
+    private String description;
 
     protected Entry() {
         // default constructor required by Hibernate
+    }
+    
+    public Entry(Date creationDate, Log log, String owner, String source, String description){
+        this.owner = owner;
+        this.source = source;
+        this.description = description;
+        this.log = log;
+        setCreationDate(creationDate);
     }
 
     // Log should be "user-immutable" as well
@@ -57,14 +81,6 @@ public class Entry implements Serializable {
     protected void setCreationDate(Date creationDate) {
         // create a defensive copy of the mutable Date class
         this.creationDate = new Date(creationDate.getTime());
-    }
-
-    public Log getLog() {
-        return log;
-    }
-
-    protected void setLog(Log log) {
-        this.log = log;
     }
 
     public Long getId() {
