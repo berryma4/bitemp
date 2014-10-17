@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
-  <persistence-unit name="olog" transaction-type="RESOURCE_LOCAL">
-    <non-jta-data-source>jdbc/olog_bitemp</non-jta-data-source>
-    <class>edu.msu.frib.olog.bitemp.BitempEntry</class>
-    <class>edu.msu.frib.olog.bitemp.Entry</class>
-    <class>edu.msu.frib.olog.bitemp.Log</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+  <persistence-unit name="olog" transaction-type="JTA">
+    <provider>org.datanucleus.api.jpa.PersistenceProviderImpl</provider>
+    <jta-data-source>jdbc/olog_bitemp</jta-data-source>
+    <class>edu.msu.frib.olog.bitemp.entity.Entry</class>
+    <class>edu.msu.frib.olog.bitemp.entity.Log</class>
+    <class>edu.msu.frib.olog.bitemp.entity.BitempEntry</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/olog_bitemp"/>
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="gogreen"/>
-            <property name="datanucleus.schema.autoCreateAll" value="true"/>
-            <property name="datanucleus.schema.validateTables" value="false"/>
-            <property name="datanucleus.schema.validateConstraints" value="false"/>
-            <property name="datanucleus.storeManagerType" value="rdbms"/>
-        </properties>
+      <property name="datanucleus.schema.autoCreateAll" value="true"/>
+      <property name="datanucleus.schema.validateTables" value="false"/>
+      <property name="datanucleus.schema.validateConstraints" value="false"/>
+      <property name="datanucleus.storeManagerType" value="rdbms"/>
+    </properties>
   </persistence-unit>
 </persistence>
